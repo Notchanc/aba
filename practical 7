@@ -1,0 +1,76 @@
+Aim = Sampling and Sampling Distributions:
+
+
+a. Conduct a survey and collect data from a sample population, ensuring proper
+sampling techniques are employed.
+
+
+Code:
+
+
+import random
+
+# Define the population of participants with Indian names
+
+population = [
+    {"id": 1, "name": "Aarav", "age": 25, "gender": "Male", "favorite_food": "Pizza"}, {"id": 2, "name": "Aarushi", "age": 30, "gender": "Female", "favorite_food": "Sushi"}, {"id": 3, "name": "Ishaan", "age": 35, "gender": "Male", "favorite_food": "Burger"}, {"id": 4, "name": "Diya", "age": 28, "gender": "Female", "favorite_food": "Pasta"}, {"id": 5, "name": "Aditya", "age": 40, "gender": "Male", "favorite_food": "Steak"}, {"id": 6, "name": "Kavya", "age": 22, "gender": "Female", "favorite_food": "Salad"}, {"id": 7, "name": "Aryan", "age": 33, "gender": "Male", "favorite_food": "Tacos"}, {"id": 8, "name": "Ananya", "age": 29, "gender": "Female", "favorite_food": "Ramen"}, {"id": 9, "name": "Arjun", "age": 27, "gender": "Male", "favorite_food": "Chicken Wings"}, {"id": 10, "name": "Khushi", "age": 31, "gender": "Female", "favorite_food": "Sushi"}
+]
+
+# Define the sample size
+sample_size = 5
+
+# Randomly select participants for the sample
+sample = random.sample(population, sample_size)
+
+# Display the sample
+print("Sampled Participants:")
+for participant in sample:
+    print(participant)
+
+
+
+
+b. Use the Central Limit Theorem to analyze the sampling distribution of a sample
+mean and estimate population parameters.
+
+
+Code:
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Parameters for the population distribution
+population_mean = 50
+population_std = 10
+population_size = 10000
+
+# Generate data from the population distribution
+population_data = np.random.normal(population_mean, population_std, population_size)
+
+# Sample parameters
+sample_size = 100
+num_samples = 1000
+
+# Calculate sample means
+sample_means = []
+for _ in range(num_samples):
+    sample = np.random.choice(population_data, sample_size, replace=False)
+    sample_mean = np.mean(sample)
+    sample_means.append(sample_mean)
+
+# Plot the sampling distribution of the sample mean
+plt.figure(figsize=(10, 6))
+plt.hist(sample_means, bins=30, color='skyblue', edgecolor='black', alpha=0.7)
+plt.title('Sampling Distribution of Sample Mean')
+plt.xlabel('Sample Mean')
+plt.ylabel('Frequency')
+plt.grid(True)
+plt.show()
+
+# Estimate population parameters using sample statistics
+estimated_population_mean = np.mean(sample_means)
+estimated_population_std = np.std(sample_means)
+
+print("Estimated Population Mean:", estimated_population_mean)
+print("Estimated Population Standard Deviation:", estimated_population_std)
