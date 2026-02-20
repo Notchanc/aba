@@ -1,0 +1,82 @@
+Aim =  Describing the Distribution of a Variable:
+
+a. Obtain a dataset and calculate descriptive statistics (mean, median, mode,
+variance, etc.) for a specific variable of interest.
+
+
+Code:
+
+!pip install matplotlib
+import pandas as pd
+
+# Load the dataset
+data_url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data'
+column_names = ['age', 'workclass', 'fnlwgt', 'education', 'education-num',
+                'marital-status', 'occupation', 'relationship', 'race', 'sex', 'capital-gain', 'capital-loss',
+                'hours-per-week', 'native-country', 'income']
+df = pd.read_csv(data_url, header=None, names=column_names, na_values=' ?')
+
+# Display the first few rows of the dataset
+print("First few rows of the dataset:")
+print(df.head())
+
+# Calculate descriptive statistics for the 'age' variable
+age_stats = df['age'].describe()
+print("\nDescriptive statistics for 'age':")
+print(age_stats)
+
+# Calculate mode for 'age'
+age_mode = df['age'].mode()
+print("\nMode for 'age':")
+print(age_mode)
+
+# Calculate variance for 'age'
+age_variance = df['age'].var()
+
+print("\nVariance for 'age':", age_variance)
+
+# Visualize the distribution of 'age' with a histogram
+import matplotlib.pyplot as plt
+
+plt.hist(df['age'], bins=20, color='skyblue', edgecolor='black')
+plt.title('Distribution of Age')
+plt.xlabel('Age')
+plt.ylabel('Frequency')
+plt.show()
+
+
+
+b. Create visualizations (histograms, box plots) to depict the distribution of a
+variable and analyze its characteristics.
+
+
+
+Code:
+
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load the dataset
+data_url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data'
+column_names = ['age', 'workclass', 'fnlwgt', 'education', 'education-num',
+                'marital-status', 'occupation', 'relationship', 'race', 'sex', 'capital-gain', 'capital-loss',
+                'hours-per-week', 'native-country', 'income']
+df = pd.read_csv(data_url, header=None, names=column_names, na_values=' ?')
+
+# Plot histogram to visualize the distribution of 'age'
+plt.figure(figsize=(10, 6))
+plt.hist(df['age'], bins=20, color='skyblue', edgecolor='black')
+plt.title('Distribution of Age')
+plt.xlabel('Age')
+plt.ylabel('Frequency')
+plt.grid(True)
+plt.show()
+
+# Plot box plot to visualize the distribution of 'age'
+plt.figure(figsize=(8, 6))
+sns.boxplot(x=df['age'], color='lightblue')
+plt.title('Box Plot of Age')
+plt.xlabel('Age')
+plt.show()
