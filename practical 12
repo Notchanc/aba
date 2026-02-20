@@ -1,0 +1,55 @@
+Aim= Analysis of Variance and Experimental Design:
+
+a. Design and conduct an experiment to study the effects of different factors on a
+specific response variable, analyze the results using analysis of variance
+(ANOVA), and draw conclusions.
+
+
+b. Implement a factorial experiment and analyze the main effects and interaction
+effects of factors using statistical techniques.
+
+
+
+
+Code:
+
+
+import numpy as np
+import pandas as pd
+from scipy.stats import f_oneway
+
+# Define factors and levels
+fertilizer_types = ['Organic', 'Chemical']
+watering_freq = ['Daily', 'Alternate-day']
+num_replications = 5  # Number of replications for each treatment combination
+
+# Simulate data for plant height
+np.random.seed(42)  # for reproducibility
+data = []
+for fert in fertilizer_types:
+    for water in watering_freq:
+        heights = np.random.normal(loc=30, scale=5, size=num_replications)  # Simulate plant heights
+        data.extend(zip([fert]*num_replications, [water]*num_replications, heights))
+
+# Create DataFrame
+df = pd.DataFrame(data, columns=['Fertilizer', 'Watering', 'Height'])
+
+# Perform ANOVA
+anova_results = {}
+
+for factor in ['Fertilizer', 'Watering']:
+    factor_levels = df[factor].unique()
+    samples = [df[df[factor] == level]['Height'] for level in factor_levels]
+    anova_results[factor] = f_oneway(*samples)
+
+# Calculate interaction effect
+interaction_effect = df.groupby(['Fertilizer', 'Watering'])['Height'].mean().unstack().diff(axis=1).iloc[:, -1]
+
+# Print ANOVA results
+print("ANOVA Results:")
+for factor, result in anova_results.items():
+    print(f"{factor}: F-value = {result.statistic}, p-value = {result.pvalue}")
+
+# Print interaction effect
+print("\nInteraction Effect:")
+print(interaction_effect)
