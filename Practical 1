@@ -1,0 +1,107 @@
+Aim= Introduction to Business Analytics:
+
+a. Collect data from a real-life business scenario and perform exploratory data
+analysis (EDA) to gain insights into the dataset.
+
+code
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load the dataset
+url = "https://archive.ics.uci.edu/ml/machine-learning-databases/00352/Online%20Retail.xlsx"
+df = pd.read_excel(url)
+
+# Data preprocessing
+df = df.dropna() # Drop rows with missing values
+df['InvoiceDate'] = pd.to_datetime(df['InvoiceDate']) # Convert InvoiceDate to datetime format
+
+# Exploratory Data Analysis (EDA)
+# Summary statistics
+print(df.describe())
+
+# Visualize the distribution of Quantity sold
+plt.figure(figsize=(10, 6))
+sns.histplot(df['Quantity'], bins=50, kde=True)
+plt.title('Distribution of Quantity Sold')
+plt.xlabel('Quantity')
+plt.ylabel('Frequency')
+plt.show()
+
+# Time series analysis
+df['InvoiceYearMonth'] = df['InvoiceDate'].dt.to_period('M')
+monthly_sales = df.groupby('InvoiceYearMonth')['Quantity'].sum()
+
+plt.figure(figsize=(10, 6))
+monthly_sales.plot(marker='o')
+plt.title('Monthly Sales Trend')
+plt.xlabel('Month')
+plt.ylabel('Total Quantity Sold')
+plt.xticks(rotation=45)
+plt.grid(True)
+plt.show()
+
+# Customer analysis
+customer_orders = df.groupby('CustomerID')['InvoiceNo'].nunique()
+plt.figure(figsize=(10, 6))
+sns.histplot(customer_orders, bins=30, kde=True)
+plt.title('Distribution of Number of Orders per Customer')
+plt.xlabel('Number of Orders')
+plt.ylabel('Number of Customers')
+plt.show()
+
+# Calculate customer lifetime value (CLV)
+df['TotalPrice'] = df['Quantity'] * df['UnitPrice']
+customer_clv = df.groupby('CustomerID')['TotalPrice'].sum()
+
+# Visualize customer CLV distribution
+plt.figure(figsize=(10, 6))
+sns.histplot(customer_clv, bins=30, kde=True)
+plt.title('Distribution of Customer Lifetime Value')
+plt.xlabel('Customer Lifetime Value')
+plt.ylabel('Number of Customers')
+plt.show()
+
+
+b. Analyze customer data to identify trends and patterns that can be used for
+business decision-making.
+
+
+Code:
+
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load the dataset
+url = "https://archive.ics.uci.edu/ml/machine-learning-databases/00352/Online%20Retail.xlsx"
+df = pd.read_excel(url)
+
+# Data preprocessing
+df = df.dropna() # Drop rows with missing values
+df['InvoiceDate'] = pd.to_datetime(df['InvoiceDate']) # Convert InvoiceDate to datetime format
+
+# Customer analysis
+customer_orders = df.groupby('CustomerID')['InvoiceNo'].nunique()
+plt.figure(figsize=(10, 6))
+sns.histplot(customer_orders, bins=30, kde=True)
+plt.title('Distribution of Number of Orders per Customer')
+plt.xlabel('Number of Orders')
+plt.ylabel('Number of Customers')
+plt.show()
+
+# Calculate customer lifetime value (CLV)
+df['TotalPrice'] = df['Quantity'] * df['UnitPrice']
+customer_clv = df.groupby('CustomerID')['TotalPrice'].sum()
+
+# Visualize customer CLV distribution
+plt.figure(figsize=(10, 6))
+sns.histplot(customer_clv, bins=30, kde=True)
+plt.title('Distribution of Customer Lifetime Value')
+plt.xlabel('Customer Lifetime Value')
+plt.ylabel('Number of Customers')
+plt.show()
+
+
