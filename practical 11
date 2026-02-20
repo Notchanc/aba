@@ -8,6 +8,8 @@ Solution.
 CODE:
 
 
+# First, install pulp: pip install pulp
+
 from pulp import LpMaximize, LpProblem, LpVariable
 
 # Define the problem
@@ -36,8 +38,6 @@ print("Optimal Solution:")
 print("Product A:", x_A.varValue)
 print("Product B:", x_B.varValue)
 print("Maximum Profit:", model.objective.value())
-
-
 
 
 b. Use simulation modeling to evaluate different business scenarios, such as
