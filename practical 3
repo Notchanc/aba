@@ -1,0 +1,50 @@
+Aim=Finding Relationships Among Variables:
+
+
+a. Use a dataset with multiple variables and perform correlation analysis to
+determine the strength and direction of relationships between pairs of variables.
+
+
+Code:
+
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+
+# Generate synthetic dataset
+np.random.seed(0)
+advertising_expenditure = np.random.normal(50, 20, 100)
+sales_revenue = 100 + 3 * advertising_expenditure + np.random.normal(0, 10, 100)
+data = pd.DataFrame({'Advertising Expenditure': advertising_expenditure, 'Sales Revenue': sales_revenue})
+
+# Visualize the synthetic dataset
+plt.figure(figsize=(10, 6))
+plt.scatter(data['Advertising Expenditure'], data['Sales Revenue'], color='blue')
+plt.title('Relationship between Advertising Expenditure and Sales Revenue')
+plt.xlabel('Advertising Expenditure')
+plt.ylabel('Sales Revenue')
+plt.grid(True)
+plt.show()
+
+# Perform linear regression
+X = data[['Advertising Expenditure']]
+y = data['Sales Revenue']
+
+model = LinearRegression()
+model.fit(X, y)
+
+# Visualize the regression line
+plt.figure(figsize=(10, 6))
+plt.scatter(data['Advertising Expenditure'], data['Sales Revenue'], color='blue')
+plt.plot(data['Advertising Expenditure'], model.predict(X), color='red', linewidth=2)
+plt.title('Linear Regression: Advertising Expenditure vs. Sales Revenue')
+plt.xlabel('Advertising Expenditure')
+plt.ylabel('Sales Revenue')
+plt.grid(True)
+plt.show()
+
+# Print the coefficients
+print('Intercept:', model.intercept_)
+print('Coefficient:', model.coef_[0])
