@@ -1,0 +1,205 @@
+Here are practical-wise viva questions with answers for Applied Business Analytics based on your journal index.
+
+
+---
+
+📘 Applied Business Analytics Viva Questions & Answers
+
+
+---
+
+1. Introduction to Business Analytics
+
+Q1. What is Business Analytics?
+A: It is the use of data, statistical methods, and models to make business decisions.
+
+Q2. Types of analytics?
+A: Descriptive, Diagnostic, Predictive, Prescriptive.
+
+Q3. Difference between data and information?
+A: Data = raw facts; Information = processed meaningful data.
+
+Q4. Tools used in analytics?
+A: Excel, Python, R, Tableau, Power BI.
+
+
+---
+
+2. Decision Making Under Certainty
+
+Q1. What is decision making under certainty?
+A: When outcomes of all alternatives are known with complete certainty.
+
+Q2. Which method is used?
+A: Payoff comparison or profit maximization.
+
+Q3. Example?
+A: Choosing supplier when prices and delivery times are fixed.
+
+
+---
+
+3. Solving Analytical Problems Using Tools (Solver/Model)
+
+Q1. What is a model?
+A: A mathematical representation of a real situation.
+
+Q2. What is optimization?
+A: Finding the best solution among alternatives.
+
+Q3. What is a constraint?
+A: A limitation or restriction in a model.
+
+
+---
+
+4. Probability and Probability Distribution
+
+Q1. What is probability?
+A: Likelihood of an event occurring (0 to 1).
+
+Q2. Types of probability?
+A: Classical, empirical, subjective.
+
+Q3. What is distribution?
+A: Pattern of probability values for a variable.
+
+Q4. Example distributions?
+A: Binomial, Poisson, Normal.
+
+
+---
+
+5. Decision Making Under Uncertainty
+
+Q1. What is uncertainty?
+A: When probabilities of outcomes are unknown.
+
+Q2. Decision criteria?
+A: Maximax, Maximin, Minimax regret, Laplace.
+
+Q3. Difference from risk?
+A: Risk = probabilities known; Uncertainty = probabilities unknown.
+
+
+---
+
+6. Sampling and Sampling Distribution
+
+Q1. What is sampling?
+A: Selecting a subset from a population.
+
+Q2. Types of sampling?
+A: Random, stratified, systematic, cluster.
+
+Q3. What is sampling distribution?
+A: Distribution of a statistic from repeated samples.
+
+Q4. Why sampling?
+A: Saves time, cost, effort.
+
+
+---
+
+7. Confidence Interval Estimation
+
+Q1. What is confidence interval?
+A: Range within which population parameter lies with certain probability.
+
+Q2. Meaning of 95% confidence?
+A: 95% of such intervals contain true value.
+
+Q3. Formula for mean CI?
+A: Mean ± Z × (σ/√n)
+
+
+---
+
+8. Hypothesis Testing
+
+Q1. What is hypothesis?
+A: A statement about a population parameter.
+
+Q2. Types?
+A: Null hypothesis (H₀) and Alternative (H₁).
+
+Q3. What is p-value?
+A: Probability of observing result assuming H₀ is true.
+
+Q4. Type I error?
+A: Rejecting true H₀.
+
+Q5. Type II error?
+A: Accepting false H₀.
+
+
+---
+
+9. Regression Analysis & Time Series
+
+Q1. What is regression?
+A: Relationship between dependent and independent variables.
+
+Q2. Simple linear regression equation?
+A: Y = a + bX
+
+Q3. What is R²?
+A: Proportion of variation explained by model.
+
+Q4. What is time series?
+A: Data collected over time.
+
+Q5. Components of time series?
+A: Trend, seasonal, cyclical, irregular.
+
+
+---
+
+10. Optimization Modeling & Simulation
+
+Q1. What is simulation?
+A: Imitation of real system behavior using a model.
+
+Q2. Why simulation used?
+A: When real experiment is costly or risky.
+
+Q3. Types of optimization models?
+A: Linear, integer, nonlinear.
+
+Q4. What is objective function?
+A: Function to maximize or minimize.
+
+
+---
+
+11. Analysis of Variance (ANOVA) & Experimental Design
+
+Q1. What is ANOVA?
+A: Technique to compare means of multiple groups.
+
+Q2. When used?
+A: When more than two sample means are compared.
+
+Q3. What is F-test?
+A: Test statistic used in ANOVA.
+
+Q4. What is experimental design?
+A: Planning experiment to obtain valid results.
+
+Q5. Principles of design?
+A: Randomization, replication, blocking.
+
+
+---
+
+✅ Tip for Viva:
+If examiner asks “Which practical was most useful?” — say:
+
+> Regression and hypothesis testing because they help in real business decision making and data interpretation.
+
+
+
+
+---
+
+✔️ If you want, I can also prepare 1-line quick revision answers sheet for last-minute viva preparation.
