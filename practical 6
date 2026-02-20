@@ -1,0 +1,54 @@
+Aim= Decision Making under Uncertainty:
+
+
+a. Develop a decision tree model to make business decisions considering
+uncertainties and associated probabilities at each decision point. b. Apply the
+concept of expected value to evaluate different decision alternatives and select
+the optimal one.
+
+
+Code:
+
+
+import numpy as np
+import pandas as pd
+
+# Define decision tree structure
+decision_tree = {
+    'Decision 1': {'Option A': (0.4, 100), 'Option B': (0.6, 80)},
+    'Decision 2': {'Option C': (0.3, 50), 'Option D': (0.7, 70)}
+}
+
+# Function to calculate expected value
+def calculate_expected_value(decision_tree):
+    expected_values = {}
+    for decision, options in decision_tree.items():
+        expected_value = 0
+        for option, (probability, payoff) in options.items():
+            expected_value += probability * payoff
+        expected_values[decision] = expected_value
+    return expected_values
+
+# Function to visualize decision tree
+def visualize_decision_tree(decision_tree):
+    print("Decision Tree:")
+    for decision, options in decision_tree.items():
+        print(f"{decision}:")
+        for option, (probability, payoff) in options.items():
+            print(f"  {option}: Probability = {probability}, Payoff = {payoff}")
+        print()
+
+# Function to find optimal decision
+def find_optimal_decision(decision_tree):
+    expected_values = calculate_expected_value(decision_tree)
+    optimal_decision = max(expected_values, key=expected_values.get)
+    return optimal_decision, expected_values[optimal_decision]
+
+# Main function
+def main():
+    visualize_decision_tree(decision_tree)
+    optimal_decision, expected_value = find_optimal_decision(decision_tree)
+    print(f"\nOptimal Decision: {optimal_decision}, Expected Value: {expected_value}")
+
+if __name__ == "__main__":
+    main()
