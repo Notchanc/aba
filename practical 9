@@ -1,0 +1,44 @@
+Aim= Hypothesis Testing:
+
+
+a. Formulate null and alternative hypotheses related to a business problem,
+conduct a hypothesis test using appropriate statistical tests, and interpret the
+results.
+
+
+b. Perform A/B testing on a website or marketing campaign to evaluate the
+effectiveness of different strategies and make data-driven decisions.
+
+
+Code :
+
+
+import numpy as np
+from scipy import stats
+
+# Example data for hypothesis testing (sales revenue)
+strategy_A_sales = np.array([1000, 1200, 1100, 1300, 1400])
+strategy_B_sales = np.array([900, 1100, 1000, 1200, 1300])
+
+# Conduct two-sample t-test for hypothesis testing
+t_statistic, p_value = stats.ttest_ind(strategy_A_sales, strategy_B_sales)
+print("Hypothesis Testing Results:")
+print("t-statistic:", t_statistic)
+print("p-value:", p_value)
+
+# Example data for A/B testing (conversion rates)
+visitors_A = 1000
+conversions_A = 100
+visitors_B = 1200
+conversions_B = 130
+
+# Conduct z-test for proportions for A/B testing
+p_A = conversions_A / visitors_A
+p_B = conversions_B / visitors_B
+p_pool = (conversions_A + conversions_B) / (visitors_A + visitors_B)
+z_statistic = (p_A - p_B) / np.sqrt(p_pool * (1 - p_pool) * (1/visitors_A + 1/visitors_B))
+p_value_AB = 2 * (1 - stats.norm.cdf(np.abs(z_statistic)))  # Two-tailed test
+
+print("\nA/B Testing Results:")
+print("z-statistic:", z_statistic)
+print("p-value:", p_value_AB)
