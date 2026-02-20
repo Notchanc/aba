@@ -10,7 +10,7 @@ to forecast future demand for a product or service, and evaluate the accuracy of
 the forecasts.
 
 
-Code:
+Code:   A] REGRESSION MODEL
 
 
 import numpy as np
@@ -18,9 +18,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error
-from statsmodels.tsa.arima.model import ARIMA
-from statsmodels.tsa.holtwinters import ExponentialSmoothing
+from sklearn.metrics import mean_squared_error, r2_score
 
 # Generate sample sales data
 np.random.seed(0)
@@ -30,39 +28,78 @@ sales_data = pd.DataFrame({'Date': dates, 'Sales': sales})
 
 # Part a: Regression Analysis
 def regression_analysis(data):
+    # Prepare data: convert date to numeric for regression
     X = pd.to_numeric(data['Date']).values.reshape(-1, 1)
     y = data['Sales'].values
+    
+    # Split into train and test sets
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
+    # Build and train model
     model = LinearRegression()
     model.fit(X_train, y_train)
 
+    # Make predictions
     y_pred = model.predict(X_test)
+    
+    # Assess model performance
     mse = mean_squared_error(y_test, y_pred)
+    r2 = r2_score(y_test, y_pred)
+    print("Mean Squared Error (MSE):", mse)
+    print("R-squared Score:", r2)
 
-    print("Mean Squared Error (MSE) for regression model:", mse)
-
-    # Plot actual vs predicted sales
-    plt.figure(figsize=(10, 6))
-    plt.plot(data['Date'], data['Sales'], label='Actual Sales')
-    plt.plot(data['Date'].iloc[X_test.flatten()], y_pred, label='Predicted Sales')
+    # Plot actual vs predicted sales (FIXED: sort by date for proper alignment)
+    plt.figure(figsize=(12, 6))
+    
+    # Plot all actual sales
+    plt.plot(data['Date'], data['Sales'], 'b-', label='Actual Sales', alpha=0.7)
+    
+    # Get test indices and sort them for proper date alignment
+    test_indices = np.argsort(X_test.flatten())
+    sorted_test_dates = pd.to_datetime(X_test.flatten()[test_indices])
+    sorted_y_pred = y_pred[test_indices]
+    
+    # Plot predicted sales (sorted by date)
+    plt.plot(sorted_test_dates, sorted_y_pred, 'ro-', label='Predicted Sales (Test)', markersize=6)
+    
     plt.title('Regression Model: Actual vs Predicted Sales')
     plt.xlabel('Date')
     plt.ylabel('Sales')
     plt.legend()
+    plt.grid(True, alpha=0.3)
+    plt.xticks(rotation=45)
+    plt.tight_layout()
     plt.show()
 
     # Interpret significance of predictor variables (coefficients)
+    print("\nModel Coefficients:")
     print("Intercept:", model.intercept_)
     print("Coefficient (slope):", model.coef_[0])
+    print("\nInterpretation:")
+    print(f"- For each day increase, sales change by {model.coef_[0]:.4f} units")
+    print(f"- Model explains {r2*100:.2f}% of sales variance")
+
+# Run Part A
+regression_analysis(sales_data)
+
+
+
+
+
+code B1]  ARIMA Model
+
+
+
+from statsmodels.tsa.arima.model import ARIMA
 
 # Part b: Time Series Analysis - ARIMA
 def time_series_analysis_arima(data):
-    model = ARIMA(data['Sales'], order=(5, 1, 0))  # ARIMA(p,d,q) - example order (p=5, d=1, q=0)
+    # Build ARIMA model (p=5, d=1, q=0)
+    model = ARIMA(data['Sales'], order=(5, 1, 0))
     model_fit = model.fit()
 
-    # Forecasting
-    forecast = model_fit.forecast(steps=10)  # Forecasting 10 future steps
+    # Forecasting future demand
+    forecast = model_fit.forecast(steps=10)  # Forecast 10 future steps
     print("ARIMA Forecasted Sales:", forecast)
 
     # Plotting
@@ -75,13 +112,27 @@ def time_series_analysis_arima(data):
     plt.legend()
     plt.show()
 
+# Run ARIMA
+time_series_analysis_arima(sales_data)
+
+
+
+
+
+code   B2]  Exponential Smoothing Model
+
+
+
+from statsmodels.tsa.holtwinters import ExponentialSmoothing
+
 # Part b: Time Series Analysis - Exponential Smoothing
 def time_series_analysis_exponential_smoothing(data):
+    # Build Exponential Smoothing model
     model = ExponentialSmoothing(data['Sales'], seasonal_periods=7, trend='add', seasonal='add')
     model_fit = model.fit()
 
-    # Forecasting
-    forecast = model_fit.forecast(steps=10)  # Forecasting 10 future steps
+    # Forecasting future demand
+    forecast = model_fit.forecast(steps=10)  # Forecast 10 future steps
     print("Exponential Smoothing Forecasted Sales:", forecast)
 
     # Plotting
@@ -94,16 +145,5 @@ def time_series_analysis_exponential_smoothing(data):
     plt.legend()
     plt.show()
 
-# Main function
-def main():
-    print("Regression Analysis:")
-    regression_analysis(sales_data)
-
-    print("\nTime Series Analysis - ARIMA:")
-    time_series_analysis_arima(sales_data)
-
-    print("\nTime Series Analysis - Exponential Smoothing:")
-    time_series_analysis_exponential_smoothing(sales_data)
-
-if __name__ == "__main__":
-    main()
+# Run Exponential Smoothing
+time_series_analysis_exponential_smoothing(sales_data)
