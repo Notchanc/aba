@@ -1,0 +1,74 @@
+Aim= Probability and Probability Distributions:
+
+
+a. Simulate a probability experiment (e.g., rolling dice) using programming and
+calculate the probabilities of different outcomes.
+
+
+Code:
+
+
+import random
+
+def roll_dice(num_rolls):
+    outcomes = [0] * 6  # Initialize outcomes counter for 6 sides of a die
+    for _ in range(num_rolls):
+        outcome = random.randint(1, 6)  # Simulate rolling a six-sided die
+        outcomes[outcome - 1] += 1  # Increment the count for the corresponding outcome
+    probabilities = [count / num_rolls for count in outcomes]  # Calculate probabilities
+    return probabilities
+
+num_rolls = 10000
+probabilities = roll_dice(num_rolls)
+
+for outcome, probability in enumerate(probabilities, start=1):
+    print(f"Probability of getting {outcome} is {probability:.4f}")
+
+
+
+    b. Generate random numbers from various probability distributions (normal,
+uniform, exponential) and analyze their properties.
+
+
+
+Code:
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Generate random numbers from normal distribution
+mean = 0
+std_dev = 1
+num_samples = 1000
+normal_samples = np.random.normal(mean, std_dev, num_samples)
+
+# Plot histogram
+plt.hist(normal_samples, bins=30, density=True, alpha=0.6, color='g')
+plt.title('Normal Distribution')
+plt.xlabel('Value')
+plt.ylabel('Frequency')
+plt.show()
+
+# Generate random numbers from uniform distribution
+low = 0
+high = 1
+uniform_samples = np.random.uniform(low, high, num_samples)
+
+# Plot histogram
+plt.hist(uniform_samples, bins=30, density=True, alpha=0.6, color='b')
+plt.title('Uniform Distribution')
+plt.xlabel('Value')
+plt.ylabel('Frequency')
+plt.show()
+
+# Generate random numbers from exponential distribution
+lambda_param = 1  # Rate parameter
+exponential_samples = np.random.exponential(scale=1/lambda_param, size=num_samples)
+
+# Plot histogram
+plt.hist(exponential_samples, bins=30, density=True, alpha=0.6, color='r')
+plt.title('Exponential Distribution')
+plt.xlabel('Value')
+plt.ylabel('Frequency')
+plt.show()
